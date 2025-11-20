@@ -1,4 +1,4 @@
-/* Background gradient */
+/* Body background and font */
 body {
     margin: 0;
     padding: 0;
@@ -12,7 +12,7 @@ body {
     overflow: hidden;
 }
 
-/* Soft scan-line overlay effect */
+/* Subtle scan-line overlay */
 .scan-overlay {
     position: fixed;
     top: 0;
@@ -34,28 +34,44 @@ body {
     100% { transform: translateY(100%); }
 }
 
+/* Container for centered content */
 .container {
     text-align: center;
     max-width: 600px;
     padding: 20px;
 }
 
-/* Glow heading */
+/* Title glow effect with two lines */
 .glow-text {
-    font-size: 2.7rem;
-    letter-spacing: 1.5px;
+    text-align: center;
+    display: block;
     color: #cfaeff;
     text-shadow: 0 0 12px #8b4dff, 0 0 25px #5d2bff;
+    font-weight: bold;
 }
 
-/* Subtext */
+.glow-text .line1,
+.glow-text .line2 {
+    display: block;   /* forces each on its own line */
+    line-height: 1.2;
+}
+
+.glow-text .line1 {
+    font-size: 2.5rem;
+}
+
+.glow-text .line2 {
+    font-size: 3rem;
+}
+
+/* Subtext below title */
 .subtext {
     font-size: 1.15rem;
     opacity: 0.8;
     margin-top: 10px;
 }
 
-/* Spinner */
+/* Spinner animation */
 .spinner {
     margin: 30px auto;
     width: 45px;
@@ -70,7 +86,7 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* Resume Button */
+/* Resume button styling */
 .resume-btn {
     display: inline-block;
     margin-top: 25px;
