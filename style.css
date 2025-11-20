@@ -47,6 +47,7 @@ body {
     justify-content: center;     /* center horizontally */
     gap: 20px;                   /* space between buttons */
     margin-top: 25px;            /* spacing below spinner/title */
+    flex-wrap: wrap;
 }
 
 /* Title glow effect with two lines */
@@ -107,6 +108,7 @@ body {
     letter-spacing: 0.5px;
     transition: 0.25s;
     box-shadow: 0 0 12px #5d2bffaa;
+    white-space: nowrap;
 }
 
 .resume-btn:hover {
@@ -124,6 +126,7 @@ body {
     letter-spacing: 0.5px;
     transition: 0.25s;
     box-shadow: 0 0 12px #7b4dffaa;
+    white-space: nowrap;
 }
 
 .cert-btn:hover {
