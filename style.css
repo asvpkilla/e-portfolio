@@ -41,6 +41,14 @@ body {
     padding: 20px;
 }
 
+/* Container holding both buttons side by side */
+.buttons-container {
+    display: flex;               /* side by side */
+    justify-content: center;     /* center horizontally */
+    gap: 20px;                   /* space between buttons */
+    margin-top: 25px;            /* spacing below spinner/title */
+}
+
 /* Title glow effect with two lines */
 .glow-text {
     text-align: center;
@@ -104,6 +112,23 @@ body {
 .resume-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 0 18px #8d5bffdd;
+}
+
+.cert-btn {
+    padding: 13px 34px;
+    background: linear-gradient(145deg, #4b00ff, #7b4dff);
+    color: #fff;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: 0.25s;
+    box-shadow: 0 0 12px #7b4dffaa;
+}
+
+.cert-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 18px #7b4dffdd;
 }
 
 /* Social links */
