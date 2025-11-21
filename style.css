@@ -39,7 +39,7 @@ body {
 .glow-text .line2 { font-size: 3rem; display: block; line-height: 1.2; }
 
 /* Subtext */
-.subtext { font-size: 1rem; opacity: 0.8; margin-top: 10px; font-family: 'Press Start 2P', cursive; }
+.subtext { font-size: 1.15rem; opacity: 0.8; margin-top: 10px; font-family: 'Press Start 2P', cursive; }
 
 /* Spinner */
 .spinner {
@@ -71,14 +71,14 @@ body {
     font-size: 1.1rem;
     border-radius: 6px;
     text-decoration: none;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     box-shadow: 0 0 12px rgba(255,255,255,0.3);
     white-space: nowrap;
     transition: 0.25s;
     color: #fff;
     cursor: pointer;
-    border: none;      /* Remove border */
-    outline: none;     /* Remove focus outline */
+    border: none;
+    outline: none;
     font-family: 'Press Start 2P', cursive;
 }
 
@@ -93,7 +93,7 @@ body {
 
 /* Social links */
 .social-links { margin-top: 28px; display: flex; justify-content: center; gap: 22px; font-family: 'Press Start 2P', cursive; }
-.social-links a { text-decoration: none; color: #d8c3ff; font-size: 0.85rem; transition: 0.25s; }
+.social-links a { text-decoration: none; color: #d8c3ff; font-size: 1.15rem; transition: 0.25s; }
 .social-links a:hover { color: #fff; text-shadow: 0 0 8px #ba8cff; transform: scale(1.1); }
 
 /* Modal */
@@ -132,8 +132,8 @@ body {
 .cert-grid img:hover { transform: scale(1.05); }
 
 /* Responsive buttons */
-@media (max-width: 768px) { .resume-btn, .cert-btn { padding: 12px 28px; font-size: 0.75rem; } }
-@media (max-width: 480px) { .resume-btn, .cert-btn { padding: 10px 20px; font-size: 0.65rem; } }
+@media (max-width: 768px) { .resume-btn, .cert-btn { padding: 12px 28px; font-size: 1rem; } }
+@media (max-width: 480px) { .resume-btn, .cert-btn { padding: 10px 20px; font-size: 0.95rem; } }
 
 /* ===== Top Animated Banner (Press Start 2P & Neon) ===== */
 .top-banner {
@@ -157,7 +157,7 @@ body {
     display: inline-block;
     white-space: nowrap;
     padding-left: 100%;
-    font-size: 0.75rem;
+    font-size: 1rem; /* same as previous font size */
     letter-spacing: 1px;
     color: #cfaeff;
     text-shadow: 0 0 10px #8b4dff, 0 0 20px #5d2bff, 0 0 30px #a57fff;
