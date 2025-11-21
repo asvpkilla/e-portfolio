@@ -3,11 +3,11 @@
 
 body {
     margin: 0;
-    padding: 55px 0 0 0; /* top padding to accommodate banner */
+    padding: 55px 0 0 0; /* top padding for banner */
     min-height: 100vh;
     background: radial-gradient(circle at top, #1a1035, #090a12 65%, #060608);
     color: #e8d9ff;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Press Start 2P', cursive; /* Retro arcade font */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,12 +34,12 @@ body {
 .container { text-align: center; max-width: 600px; padding: 20px; }
 
 /* Title */
-.glow-text { display: block; font-weight: bold; color: #cfaeff; text-shadow: 0 0 12px #8b4dff, 0 0 25px #5d2bff; }
+.glow-text { display: block; font-weight: bold; color: #cfaeff; text-shadow: 0 0 12px #8b4dff, 0 0 25px #5d2bff; font-family: 'Press Start 2P', cursive; }
 .glow-text .line1 { font-size: 2.5rem; display: block; line-height: 1.2; }
 .glow-text .line2 { font-size: 3rem; display: block; line-height: 1.2; }
 
 /* Subtext */
-.subtext { font-size: 1.15rem; opacity: 0.8; margin-top: 10px; }
+.subtext { font-size: 1rem; opacity: 0.8; margin-top: 10px; font-family: 'Press Start 2P', cursive; }
 
 /* Spinner */
 .spinner {
@@ -52,7 +52,7 @@ body {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ===== Buttons (Standardized, No Outline) ===== */
+/* ===== Buttons ===== */
 .buttons-container {
     display: flex;
     align-items: stretch;
@@ -71,7 +71,7 @@ body {
     font-size: 1.1rem;
     border-radius: 6px;
     text-decoration: none;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     box-shadow: 0 0 12px rgba(255,255,255,0.3);
     white-space: nowrap;
     transition: 0.25s;
@@ -79,6 +79,7 @@ body {
     cursor: pointer;
     border: none;      /* Remove border */
     outline: none;     /* Remove focus outline */
+    font-family: 'Press Start 2P', cursive;
 }
 
 .resume-btn { background: linear-gradient(145deg, #5d2bff, #8d5bff); }
@@ -87,15 +88,12 @@ body {
 .cert-btn { background: linear-gradient(145deg, #4b00ff, #7b4dff); }
 .cert-btn:hover { transform: translateY(-3px); box-shadow: 0 0 18px #7b4dffdd; }
 
-/* Remove focus outline for all buttons */
-.resume-btn:focus, .cert-btn:focus {
-    outline: none;
-    box-shadow: 0 0 18px #7b4dffdd; /* maintain glow effect on focus */
-}
+/* Focus glow for buttons */
+.resume-btn:focus, .cert-btn:focus { outline: none; box-shadow: 0 0 18px #7b4dffdd; }
 
 /* Social links */
-.social-links { margin-top: 28px; display: flex; justify-content: center; gap: 22px; }
-.social-links a { text-decoration: none; color: #d8c3ff; font-size: 1.15rem; transition: 0.25s; }
+.social-links { margin-top: 28px; display: flex; justify-content: center; gap: 22px; font-family: 'Press Start 2P', cursive; }
+.social-links a { text-decoration: none; color: #d8c3ff; font-size: 0.85rem; transition: 0.25s; }
 .social-links a:hover { color: #fff; text-shadow: 0 0 8px #ba8cff; transform: scale(1.1); }
 
 /* Modal */
@@ -114,6 +112,7 @@ body {
     max-width: 90%; width: 600px;
     text-align: center;
     color: #fff;
+    font-family: 'Press Start 2P', cursive;
 }
 .close-btn { position: absolute; top: 10px; right: 20px; font-size: 28px; cursor: pointer; color: #fff; }
 
@@ -133,16 +132,16 @@ body {
 .cert-grid img:hover { transform: scale(1.05); }
 
 /* Responsive buttons */
-@media (max-width: 768px) { .resume-btn, .cert-btn { padding: 12px 28px; font-size: 1rem; } }
-@media (max-width: 480px) { .resume-btn, .cert-btn { padding: 10px 20px; font-size: 0.95rem; } }
+@media (max-width: 768px) { .resume-btn, .cert-btn { padding: 12px 28px; font-size: 0.75rem; } }
+@media (max-width: 480px) { .resume-btn, .cert-btn { padding: 10px 20px; font-size: 0.65rem; } }
 
-/* ===== Top Animated Banner (Themed & Glowing) ===== */
+/* ===== Top Animated Banner (Press Start 2P & Neon) ===== */
 .top-banner {
     width: 100%;
     overflow: hidden;
-    background-color: rgba(26, 16, 53, 0.8); /* dark purple gradient vibe */
-    backdrop-filter: blur(8px); /* glassy blur effect */
-    color: #cfaeff; /* neon/purple accent */
+    background-color: rgba(26, 16, 53, 0.8);
+    backdrop-filter: blur(8px);
+    color: #cfaeff;
     padding: 10px 0;
     position: fixed;
     top: 0;
@@ -150,7 +149,7 @@ body {
     z-index: 9999;
     border-bottom: 1px solid rgba(200,170,255,0.3);
     text-align: center;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Press Start 2P', cursive;
     box-shadow: 0 0 12px rgba(141,91,255,0.2);
 }
 
@@ -158,7 +157,7 @@ body {
     display: inline-block;
     white-space: nowrap;
     padding-left: 100%;
-    font-size: 1rem;
+    font-size: 0.75rem;
     letter-spacing: 1px;
     color: #cfaeff;
     text-shadow: 0 0 10px #8b4dff, 0 0 20px #5d2bff, 0 0 30px #a57fff;
