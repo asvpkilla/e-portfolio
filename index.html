@@ -22,13 +22,13 @@
         <!-- Spinner animation -->
         <div class="spinner"></div>
 
-        <!-- Resume download & certification buttons -->
+        <!-- Resume download button and certifications button -->
         <div class="buttons-container">
             <a class="resume-btn" href="Jesus_Santiago_Resume_Optimized.pdf" download>
                 Download Resume
             </a>
 
-            <a class="cert-btn" href="javascript:void(0);">
+            <a class="cert-btn" href="#" id="certBtn">
                 View Certifications
             </a>
         </div> 
@@ -41,45 +41,47 @@
         </div>
     </div>
 
-    <!-- Certification Modal -->
-    <div id="cert-modal" class="modal">
-      <div class="modal-content">
-        <span class="close-btn">&times;</span>
-        <h2>My Certifications</h2>
-        <div class="cert-grid">
-          <a href="https://www.credly.com/badges/8a3b3f8e-cda9-4d99-b780-2a13f23afb5a" target="_blank">
-            <img src="assets/certifications/cert1.png" alt="Certification 1">
-          </a>
-          <a href="https://www.credly.com/badges/8a813caf-6e2e-465e-9572-5dd0469c7a1e" target="_blank">
-            <img src="assets/certifications/cert2.png" alt="Certification 2">
-          </a>
-          <!-- Add more badges here -->
+    <!-- ===== Modal ===== -->
+    <div id="certModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>My Certifications</h2>
+            <div class="cert-grid">
+                <!-- Example certification badge -->
+                <a href="https://www.credly.com/badges/8a3b3f8e-cda9-4d99-b780-2a13f23afb5a" target="_blank">
+                    <img src="assets/certifications/cert1.png" alt="Certification 1">
+                </a>
+                <a href="https://www.credly.com/badges/8a813caf-6e2e-465e-9572-5dd0469c7a1e" target="_blank">
+                    <img src="assets/certifications/cert2.png" alt="Certification 2">
+                </a>
+                <!-- Add more badges as needed -->
+            </div>
         </div>
-      </div>
     </div>
 
-    <!-- Modal JavaScript -->
+    <!-- ===== JavaScript ===== -->
     <script>
-      const modal = document.getElementById("cert-modal");
-      const certBtn = document.querySelector(".cert-btn");
-      const closeBtn = document.querySelector(".close-btn");
+        const modal = document.getElementById("certModal");
+        const btn = document.getElementById("certBtn");
+        const closeBtn = document.querySelector(".close-btn");
 
-      // Open modal
-      certBtn.addEventListener("click", () => {
-        modal.style.display = "block";
-      });
+        // Open modal on button click
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            modal.style.display = "block";
+        });
 
-      // Close modal on X
-      closeBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-      });
+        // Close modal on close button click
+        closeBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
 
-      // Close modal if clicked outside content
-      window.addEventListener("click", (e) => {
-        if (e.target === modal) {
-          modal.style.display = "none";
-        }
-      });
+        // Close modal when clicking outside the modal content
+        window.addEventListener("click", (e) => {
+            if (e.target == modal) {
+                modal.style.display = "none";
+            }
+        });
     </script>
 </body>
 </html>
