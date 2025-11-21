@@ -97,9 +97,12 @@ body {
 
 /* Resume button styling */
 .resume-btn {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    padding: 0 34px;
     margin-top: 25px;
-    padding: 13px 34px;
     background: linear-gradient(145deg, #5d2bff, #8d5bff);
     color: #fff;
     font-size: 1.1rem;
@@ -117,7 +120,11 @@ body {
 }
 
 .cert-btn {
-    padding: 13px 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    padding: 0 34px; 
     background: linear-gradient(145deg, #4b00ff, #7b4dff);
     color: #fff;
     font-size: 1.1rem;
@@ -132,6 +139,25 @@ body {
 .cert-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 0 18px #7b4dffdd;
+}
+
+/* Responsive button heights */
+@media (max-width: 768px) {
+    .resume-btn,
+    .cert-btn { 
+        height: 45px;
+        padding: 0 28px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .resume-btn,
+    .cert-btn { 
+        height: 40px;
+        padding: 0 20px;
+        font-size: 0.95rem;
+    }
 }
 
 /* Social links */
