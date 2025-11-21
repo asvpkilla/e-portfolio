@@ -3,7 +3,7 @@
 
 body {
     margin: 0;
-    padding: 0;
+    padding: 45px 0 0 0; /* top padding to accommodate banner */
     min-height: 100vh;
     background: radial-gradient(circle at top, #1a1035, #090a12 65%, #060608);
     color: #e8d9ff;
@@ -124,3 +124,50 @@ body {
 /* Responsive buttons */
 @media (max-width: 768px) { .resume-btn, .cert-btn { padding: 12px 28px; font-size: 1rem; } }
 @media (max-width: 480px) { .resume-btn, .cert-btn { padding: 10px 20px; font-size: 0.95rem; } }
+
+/* ===== Top Animated Banner ===== */
+.top-banner {
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    color: #ffffff;
+    padding: 8px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+.banner-text {
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(255,255,255,0.5);
+
+    /* Combined animation: scroll + flicker/glow */
+    animation: scroll-banner 12s linear infinite,
+               flicker-glow 12s linear infinite;
+}
+
+/* Scroll animation */
+@keyframes scroll-banner {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Glow flicker at start of each loop */
+@keyframes flicker-glow {
+    0%   { text-shadow: 0 0 4px rgba(255,255,255,0.6); opacity: 1; }
+    2%   { text-shadow: 0 0 10px rgba(255,255,255,0.9); opacity: 0.85; }
+    4%   { text-shadow: 0 0 3px rgba(255,255,255,0.4); opacity: 1; }
+    6%   { text-shadow: 0 0 12px rgba(255,255,255,1); opacity: 0.9; }
+    8%   { text-shadow: 0 0 4px rgba(255,255,255,0.6); opacity: 1; }
+    9%   { text-shadow: none; }
+    100% { text-shadow: none; }
+}
