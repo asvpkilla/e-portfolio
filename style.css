@@ -106,8 +106,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 50px;
-    padding: 0 34px;
+    height: 50px;
+    padding: 0 34px; 
+    line-height: 1;
     margin-top: 25px;
     background: linear-gradient(145deg, #5d2bff, #8d5bff);
     color: #fff;
@@ -129,8 +130,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 50px;
+    height: 50px;
     padding: 0 34px; 
+    line-height: 1;
     background: linear-gradient(145deg, #4b00ff, #7b4dff);
     color: #fff;
     font-size: 1.1rem;
