@@ -1,3 +1,9 @@
+/* ensure consistent box shaping across all elements */ 
+*, *:before, *::after { 
+    box-sizing: border-box; 
+    
+}
+
 /* Body background and font */
 body {
     margin: 0;
@@ -100,7 +106,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
+    min-height: 50px;
     padding: 0 34px;
     margin-top: 25px;
     background: linear-gradient(145deg, #5d2bff, #8d5bff);
@@ -123,7 +129,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
+    min-height: 50px;
     padding: 0 34px; 
     background: linear-gradient(145deg, #4b00ff, #7b4dff);
     color: #fff;
@@ -145,7 +151,7 @@ body {
 @media (max-width: 768px) {
     .resume-btn,
     .cert-btn { 
-        height: 45px;
+        min-height: 50px;
         padding: 0 28px;
         font-size: 1rem;
     }
@@ -154,7 +160,7 @@ body {
 @media (max-width: 480px) {
     .resume-btn,
     .cert-btn { 
-        height: 40px;
+        min-height: 50px;
         padding: 0 20px;
         font-size: 0.95rem;
     }
