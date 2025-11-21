@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Jesus Santiago — e-Portfolio Coming Soon">
     <title>Jesus’ e-Portfolio — Coming Soon</title>
+
+    <!-- Press Start 2P Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="top-banner">
-    <div class="banner-text">
-    Currently the full site is under construction — this is just a splash page.
-  
-    </div>
-    
+        <div class="banner-text">
+            Currently the full site is under construction — this is just a splash page.
+        </div>
     </div>
     
     <!-- Subtle moving scan-line overlay -->
@@ -67,23 +69,19 @@
         const btn = document.getElementById("certBtn");
         const closeBtn = document.querySelector(".close-btn");
 
-        // Ensure modal starts hidden
         window.addEventListener("DOMContentLoaded", () => {
             modal.style.display = "none";
         });
 
-        // Open modal on button click
         btn.addEventListener("click", (e) => {
             e.preventDefault();
             modal.style.display = "flex";
         });
 
-        // Close modal on X click
         closeBtn.addEventListener("click", () => {
             modal.style.display = "none";
         });
 
-        // Close modal if clicking outside modal content
         window.addEventListener("click", (e) => {
             if (e.target === modal) modal.style.display = "none";
         });
