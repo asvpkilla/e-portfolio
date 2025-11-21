@@ -113,6 +113,13 @@ body {
     color: #fff;
     font-family: 'Press Start 2P', cursive;
 }
+
+.modal-content h2 {
+    font-size: 0.85rem; /* smaller than before */
+    font-family: 'Press Start 2P', cursive;
+    margin-bottom: 15px;
+}
+
 .close-btn { position: absolute; top: 10px; right: 20px; font-size: 28px; cursor: pointer; color: #fff; }
 
 .cert-grid {
