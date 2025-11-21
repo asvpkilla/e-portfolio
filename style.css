@@ -50,6 +50,7 @@ body {
 /* Container holding both buttons side by side */
 .buttons-container {
     display: flex;               /* side by side */
+    align-items: stretch;
     justify-content: center;     /* center horizontally */
     gap: 20px;                   /* space between buttons */
     margin-top: 25px;            /* spacing below spinner/title */
@@ -106,10 +107,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
-    padding: 0 34px; 
+    padding: 13px 34px; 
     line-height: 1;
-    margin-top: 25px;
+    margin-top: 0px;
     background: linear-gradient(145deg, #5d2bff, #8d5bff);
     color: #fff;
     font-size: 1.1rem;
@@ -130,8 +130,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
-    padding: 0 34px; 
+    height: auto;
+    padding: 13px 34px;
     line-height: 1;
     background: linear-gradient(145deg, #4b00ff, #7b4dff);
     color: #fff;
@@ -153,18 +153,16 @@ body {
 @media (max-width: 768px) {
     .resume-btn,
     .cert-btn { 
-        min-height: 50px;
-        padding: 0 28px;
-        font-size: 1rem;
+      padding: 12px 28px;
+      font-size: 1rem;
     }
 }
 
 @media (max-width: 480px) {
     .resume-btn,
     .cert-btn { 
-        min-height: 50px;
-        padding: 0 20px;
-        font-size: 0.95rem;
+      padding: 10px 20px;
+      font-size: 0.95rem;
     }
 }
 
