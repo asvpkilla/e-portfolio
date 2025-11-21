@@ -12,6 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     overflow-x: hidden;
+    line-height: 1.25; /* increased for readability */
 }
 
 /* Scanline overlay */
@@ -35,11 +36,11 @@ body {
 
 /* Title */
 .glow-text { display: block; font-weight: bold; color: #cfaeff; text-shadow: 0 0 12px #8b4dff, 0 0 25px #5d2bff; font-family: 'Press Start 2P', cursive; }
-.glow-text .line1 { font-size: 1.55rem; display: block; line-height: 1.2; }
-.glow-text .line2 { font-size: 1.9rem; display: block; line-height: 1.2; }
+.glow-text .line1 { font-size: 1.55rem; display: block; line-height: 1.3; }
+.glow-text .line2 { font-size: 1.9rem; display: block; line-height: 1.3; }
 
 /* Subtext */
-.subtext { font-size: 0.85rem; opacity: 0.8; margin-top: 10px; font-family: 'Press Start 2P', cursive; }
+.subtext { font-size: 0.85rem; opacity: 0.8; margin-top: 10px; font-family: 'Press Start 2P', cursive; line-height: 1.25; }
 
 /* Spinner */
 .spinner {
@@ -67,8 +68,8 @@ body {
     align-items: center;
     justify-content: center;
     padding: 13px 34px;
-    line-height: 1;
-    font-size: 0.95rem; /* slightly smaller */
+    line-height: 1.15; /* slightly increased */
+    font-size: 0.95rem;
     border-radius: 6px;
     text-decoration: none;
     letter-spacing: 0.5px;
@@ -91,7 +92,7 @@ body {
 .resume-btn:focus, .cert-btn:focus { outline: none; box-shadow: 0 0 18px #7b4dffdd; }
 
 /* Social links */
-.social-links { margin-top: 28px; display: flex; justify-content: center; gap: 22px; font-family: 'Press Start 2P', cursive; }
+.social-links { margin-top: 28px; display: flex; justify-content: center; gap: 22px; font-family: 'Press Start 2P', cursive; line-height: 1.25; }
 .social-links a { text-decoration: none; color: #d8c3ff; font-size: 0.95rem; transition: 0.25s; }
 .social-links a:hover { color: #fff; text-shadow: 0 0 8px #ba8cff; transform: scale(1.1); }
 
@@ -112,10 +113,11 @@ body {
     text-align: center;
     color: #fff;
     font-family: 'Press Start 2P', cursive;
+    line-height: 1.25;
 }
 
 .modal-content h2 {
-    font-size: 0.85rem; /* smaller than before */
+    font-size: 0.85rem; /* slightly smaller */
     font-family: 'Press Start 2P', cursive;
     margin-bottom: 15px;
 }
@@ -163,7 +165,7 @@ body {
     display: inline-block;
     white-space: nowrap;
     padding-left: 100%;
-    font-size: 0.75rem; /* slightly smaller for Press Start 2P */
+    font-size: 0.75rem;
     letter-spacing: 1px;
     color: #cfaeff;
     text-shadow: 0 0 10px #8b4dff, 0 0 20px #5d2bff, 0 0 30px #a57fff;
