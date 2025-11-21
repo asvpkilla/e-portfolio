@@ -52,7 +52,7 @@ body {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* Buttons */
+/* ===== Buttons (Standardized, No Outline) ===== */
 .buttons-container {
     display: flex;
     align-items: stretch;
@@ -61,6 +61,7 @@ body {
     margin-top: 25px;
     flex-wrap: wrap;
 }
+
 .resume-btn, .cert-btn {
     display: flex;
     align-items: center;
@@ -76,11 +77,21 @@ body {
     transition: 0.25s;
     color: #fff;
     cursor: pointer;
+    border: none;      /* Remove border */
+    outline: none;     /* Remove focus outline */
 }
+
 .resume-btn { background: linear-gradient(145deg, #5d2bff, #8d5bff); }
 .resume-btn:hover { transform: translateY(-3px); box-shadow: 0 0 18px #8d5bffdd; }
+
 .cert-btn { background: linear-gradient(145deg, #4b00ff, #7b4dff); }
 .cert-btn:hover { transform: translateY(-3px); box-shadow: 0 0 18px #7b4dffdd; }
+
+/* Remove focus outline for all buttons */
+.resume-btn:focus, .cert-btn:focus {
+    outline: none;
+    box-shadow: 0 0 18px #7b4dffdd; /* maintain glow effect on focus */
+}
 
 /* Social links */
 .social-links { margin-top: 28px; display: flex; justify-content: center; gap: 22px; }
