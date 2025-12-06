@@ -205,6 +205,7 @@ body {
     9%   { text-shadow: 0 0 10px #8b4dff, 0 0 20px #5d2bff; opacity: 1; }
 }
 
+/* Rick Roll container */
 .rick-roll-container {
     display: none;
     position: fixed;
@@ -239,7 +240,7 @@ body {
     to   { opacity: 1; transform: translate(-50%, -50%); }
 }
 
-/* Close button window */
+/* Close button window (Rick Roll) */
 .rick-close-btn {
     position: absolute;
     top: 6px;
@@ -263,3 +264,112 @@ body {
     opacity: 0.8;
 }
 
+/* ===== CRT Glitch Overlay ===== */
+.crt-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.1), rgba(0,0,0,1));
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 12000;
+    opacity: 0;
+}
+
+.crt-active {
+    animation: crtFlash 0.35s steps(2, end);
+}
+
+@keyframes crtFlash {
+    0%   { opacity: 0; transform: scale(1, 1.02); }
+    25%  { opacity: 1; }
+    50%  { opacity: 0.4; }
+    75%  { opacity: 1; }
+    100% { opacity: 0; transform: scale(1, 1.0); }
+}
+
+/* ===== Terminal Overlay ===== */
+.terminal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 13000;
+    justify-content: center;
+    align-items: center;
+}
+
+.terminal-window {
+    background: #050608;
+    border: 1px solid #33ff99;
+    box-shadow: 0 0 20px rgba(0, 255, 150, 0.4);
+    padding: 16px 18px 18px;
+    max-width: 90vw;
+    width: 600px;
+    color: #33ff99;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    position: relative;
+}
+
+.terminal-header {
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #1a3f2a;
+    opacity: 0.9;
+}
+
+.terminal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.terminal-line {
+    margin: 4px 0;
+    white-space: pre-wrap;
+}
+
+.terminal-input-line {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    gap: 8px;
+}
+
+.terminal-input-line span {
+    flex-shrink: 0;
+}
+
+#terminalInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #33ff99;
+    color: #33ff99;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 2px 0;
+    outline: none;
+}
+
+.terminal-output {
+    margin-top: 10px;
+    max-height: 30vh;
+    overflow-y: auto;
+}
+
+/* Terminal close button */
+.terminal-close-btn {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+
+    font-size: 16px;
+    line-height: 1;
+    color: #33ff99;
+    cursor: pointer;
+}
+
+.terminal-close-btn:hover {
+    opacity: 0.8;
+}
