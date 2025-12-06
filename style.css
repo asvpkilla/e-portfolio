@@ -243,31 +243,23 @@ body {
 .rick-close-btn {
     position: absolute;
     top: 6px;
-    right: 6px;
+    right: 8px;
 
-    width: 28px;
-    height: 28px;
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 1;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    color: #ffffff;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
 
-    background: #ffffff;
-    color: #000000;
-
-    border-radius: 4px;
     cursor: pointer;
-
-    /* subtle depth + soft after-glow */
-    box-shadow:
-        0 1px 3px rgba(0, 0, 0, 0.35),
-        0 0 6px rgba(255, 255, 255, 0.35);
-
-    z-index: 5;
+    z-index: 999999;
 }
 
 .rick-close-btn:hover {
-    background: #f2f2f2;
+    opacity: 0.8;
 }
 
