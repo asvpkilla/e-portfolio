@@ -22,6 +22,9 @@
     <!-- Subtle moving scan-line overlay -->
     <div class="scan-overlay"></div>
 
+    <!-- CRT glitch overlay -->
+    <div id="crtOverlay" class="crt-overlay"></div>
+
     <div class="container">
         <!-- Neon glow animated title -->
         <h1 class="glow-text">
@@ -33,7 +36,7 @@
         
         <p class="subtext">Building something clean, personal, and professional.</p>
 
-        <!-- Spinner (EE trigger: triple click/tap) -->
+        <!-- Spinner (EE: Terminal trigger – triple click) -->
         <div class="spinner" id="spinner"></div>
 
         <!-- Buttons -->
@@ -77,15 +80,24 @@
         </video>
     </div>
 
-    <!-- Hidden Terminal Overlay (opens on triple click/tap on spinner) -->
-    <div id="terminalOverlay" class="terminal-overlay" style="display: none;">
+    <!-- Hidden Terminal Overlay (EE: spinner triple-click) -->
+    <div id="terminalOverlay" class="terminal-overlay">
         <div class="terminal-window">
             <div class="terminal-header">
-                <span class="terminal-title">asvp@lab: ~</span>
+                ASVP-TERM v1.0 — Secure Access
             </div>
-            <div class="terminal-body" id="terminalBody">
-                <!-- Filled by JS on first open -->
+            <div class="terminal-body">
+                <pre class="terminal-line">> initializing secure session...</pre>
+                <pre class="terminal-line">1. pending</pre>
+
+                <div class="terminal-input-line">
+                    <span>&gt;</span>
+                    <input id="terminalInput" type="text" autocomplete="off" />
+                </div>
+
+                <div id="terminalOutput" class="terminal-output"></div>
             </div>
+            <span id="terminalCloseBtn" class="terminal-close-btn">✖</span>
         </div>
     </div>
 
@@ -133,7 +145,7 @@
                 const playPromise = rickVideo.play();
                 if (playPromise !== undefined) {
                     playPromise.catch(() => {
-                        // If play is blocked, do nothing; user can tap play
+                        // If play is blocked, user can manually press play
                     });
                 }
 
@@ -144,14 +156,14 @@
             });
         }
 
-        // Close button click
+        // Close button click (Rick Roll)
         rickCloseBtn.addEventListener("click", () => {
             rickContainer.style.display = "none";
             rickVideo.pause();
             rickVideo.currentTime = 0;
         });
 
-        // Clicking background closes AFTER 10 seconds (only when X is visible)
+        // Clicking background closes Rick Roll AFTER 10 seconds (only when X is visible)
         window.addEventListener("click", (e) => {
             if (e.target === rickContainer && rickCloseBtn.style.display === "block") {
                 rickContainer.style.display = "none";
@@ -160,62 +172,111 @@
             }
         });
 
-        // ===== Terminal Easter Egg (triple click/tap on spinner) =====
+        // ===== Terminal Easter Egg via Spinner Triple Click =====
         const spinner = document.getElementById("spinner");
+        const crtOverlay = document.getElementById("crtOverlay");
         const terminalOverlay = document.getElementById("terminalOverlay");
-        const terminalBody = document.getElementById("terminalBody");
+        const terminalInput = document.getElementById("terminalInput");
+        const terminalOutput = document.getElementById("terminalOutput");
+        const terminalCloseBtn = document.getElementById("terminalCloseBtn");
 
         let spinnerClickCount = 0;
         let spinnerClickTimer = null;
 
-        function openTerminal() {
-            if (!terminalOverlay) return;
-            terminalOverlay.style.display = "flex";
-
-            if (terminalBody && !terminalBody.dataset.initialized) {
-                terminalBody.innerHTML = `
-                    <p>asvp@lab:~$ whoami</p>
-                    <p>Jesus — Network & Systems Engineer</p>
-                    <p>asvp@lab:~$ loading portfolio...</p>
-                    <p>asvp@lab:~$ hint: try clicking the "r" in e-Portfolio</p>
-                `;
-                terminalBody.dataset.initialized = "true";
+        function resetSpinnerClickCount() {
+            spinnerClickCount = 0;
+            if (spinnerClickTimer) {
+                clearTimeout(spinnerClickTimer);
+                spinnerClickTimer = null;
             }
         }
 
-        function closeTerminal() {
-            if (!terminalOverlay) return;
-            terminalOverlay.style.display = "none";
+        function openTerminalWithGlitch() {
+            // Show CRT glitch
+            crtOverlay.classList.add("crt-active");
+            crtOverlay.style.display = "block";
+
+            setTimeout(() => {
+                // Hide glitch and show terminal
+                crtOverlay.classList.remove("crt-active");
+                crtOverlay.style.display = "none";
+
+                terminalOverlay.style.display = "flex";
+                terminalInput.value = "";
+                terminalOutput.innerHTML = "";
+                terminalInput.focus();
+            }, 350); // glitch duration
         }
 
         if (spinner) {
             spinner.addEventListener("click", () => {
                 spinnerClickCount++;
 
-                if (spinnerClickTimer) clearTimeout(spinnerClickTimer);
-
-                if (spinnerClickCount >= 3) {
-                    spinnerClickCount = 0;
-                    spinnerClickTimer = null;
-                    openTerminal();
-                    return;
+                if (!spinnerClickTimer) {
+                    spinnerClickTimer = setTimeout(() => {
+                        resetSpinnerClickCount();
+                    }, 600); // 600ms window for triple-click
                 }
 
-                spinnerClickTimer = setTimeout(() => {
-                    spinnerClickCount = 0;
-                    spinnerClickTimer = null;
-                }, 700); // 700ms window for triple tap
-            });
-        }
-
-        // Click outside terminal window closes it
-        if (terminalOverlay) {
-            terminalOverlay.addEventListener("click", (e) => {
-                if (e.target === terminalOverlay) {
-                    closeTerminal();
+                if (spinnerClickCount === 3) {
+                    resetSpinnerClickCount();
+                    openTerminalWithGlitch();
                 }
             });
         }
+
+        function closeTerminal() {
+            terminalOverlay.style.display = "none";
+        }
+
+        // Close terminal: X button
+        terminalCloseBtn.addEventListener("click", () => {
+            closeTerminal();
+        });
+
+        // Close terminal: click background
+        window.addEventListener("click", (e) => {
+            if (e.target === terminalOverlay) {
+                closeTerminal();
+            }
+        });
+
+        // Terminal input logic (Enter key)
+        terminalInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                const value = terminalInput.value.trim();
+                if (!value) return;
+
+                // Echo input
+                const safeValue = value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                terminalOutput.innerHTML += `<div class="terminal-line">> ${safeValue}</div>`;
+
+                // Secret phrase
+                if (value.toLowerCase() === "master keeper") {
+                    terminalOutput.innerHTML += `
+                        <div class="terminal-line">access granted: master routes unlocked</div>
+                        <div class="terminal-line">- main resume: <a href="Jesus_Santiago_Resume_Optimized.pdf" target="_blank">open</a></div>
+                        <div class="terminal-line">- github: <a href="https://github.com/asvpkilla" target="_blank">asvpkilla</a></div>
+                        <div class="terminal-line">- linkedin: <a href="https://www.linkedin.com/in/jmsantiago95" target="_blank">profile</a></div>
+                        <div class="terminal-line">- email: <a href="mailto:jesus@asvp.info">jesus@asvp.info</a></div>
+                    `;
+                } else {
+                    // Generic response
+                    terminalOutput.innerHTML += `<div class="terminal-line">acknowledged: "${safeValue}" — command pending implementation</div>`;
+                }
+
+                // Scroll to bottom of terminal output
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+                terminalInput.value = "";
+            }
+        });
+
+        // Optional: ESC key closes terminal
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && terminalOverlay.style.display === "flex") {
+                closeTerminal();
+            }
+        });
     </script>
 </body>
 </html>
