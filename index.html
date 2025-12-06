@@ -71,23 +71,25 @@
 
     <!-- Hidden Rick Roll Player (local MP4) -->
     <div id="rickRollContainer" class="rick-roll-container">
+        
         <!-- Close button (appears after 10s) -->
         <span id="rickCloseBtn" class="rick-close-btn" style="display: none;">✖</span>
 
+        <!-- Rick Roll video info -->
         <video id="rickRollVideo" preload="auto" playsinline>
             <source src="assets/videos/rickroll.mp4" type="video/mp4">
-            Your browser does not support the video tag.
         </video>
     </div>
 
-    <!-- Hidden Terminal Overlay (EE: spinner triple-click) -->
+    <!-- Hidden Terminal EE -->
     <div id="terminalOverlay" class="terminal-overlay">
         <div class="terminal-window">
             <div class="terminal-header">
-                ASVP-TERM v1.0 — Secure Access
+                Super Secret Secure Access Terminial.v1
             </div>
             <div class="terminal-body">
-                <pre class="terminal-line">> initializing secure session...</pre>
+                <pre class="terminal-line">>you found it, you really found my terminial. establishing and initializing secure session...</pre>
+                <pre class="terminal-line">Please select a number from the prompts below...</pre>
                 <pre class="terminal-line">1. pending</pre>
 
                 <div class="terminal-input-line">
@@ -132,6 +134,7 @@
 
         if (rickLetter) {
             rickLetter.addEventListener("click", () => {
+                
                 // Reset close button & ensure previous playback is stopped
                 rickCloseBtn.style.display = "none";
                 try {
@@ -163,7 +166,7 @@
             rickVideo.currentTime = 0;
         });
 
-        // Clicking background closes Rick Roll AFTER 10 seconds (only when X is visible)
+        // Clicking background closes Rick Roll after 10 seconds (only when X is visible)
         window.addEventListener("click", (e) => {
             if (e.target === rickContainer && rickCloseBtn.style.display === "block") {
                 rickContainer.style.display = "none";
