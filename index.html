@@ -33,8 +33,8 @@
         
         <p class="subtext">Building something clean, personal, and professional.</p>
 
-        <!-- Spinner -->
-        <div class="spinner"></div>
+        <!-- Spinner (EE trigger: triple click/tap) -->
+        <div class="spinner" id="spinner"></div>
 
         <!-- Buttons -->
         <div class="buttons-container">
@@ -72,10 +72,21 @@
         <span id="rickCloseBtn" class="rick-close-btn" style="display: none;">✖</span>
 
         <video id="rickRollVideo" preload="auto" playsinline>
-            <!-- ✅ UPDATE THIS SRC IF YOUR FILE NAME IS DIFFERENT -->
             <source src="assets/videos/rickroll.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
+    </div>
+
+    <!-- Hidden Terminal Overlay (opens on triple click/tap on spinner) -->
+    <div id="terminalOverlay" class="terminal-overlay" style="display: none;">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span class="terminal-title">asvp@lab: ~</span>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <!-- Filled by JS on first open -->
+            </div>
+        </div>
     </div>
 
     <!-- JavaScript -->
@@ -101,7 +112,7 @@
             if (e.target === modal) modal.style.display = "none";
         });
         
-        // Rick Roll Easter Egg (embedded local video w/ delayed close button)
+        // Rick Roll Easter Egg (local video w/ delayed close button)
         const rickLetter = document.getElementById("rickTrigger");
         const rickContainer = document.getElementById("rickRollContainer");
         const rickVideo = document.getElementById("rickRollVideo");
@@ -122,8 +133,7 @@
                 const playPromise = rickVideo.play();
                 if (playPromise !== undefined) {
                     playPromise.catch(() => {
-                        // If play is blocked, we just leave controls visible
-                        // (you can optionally show a hint here)
+                        // If play is blocked, do nothing; user can tap play
                     });
                 }
 
@@ -149,6 +159,63 @@
                 rickVideo.currentTime = 0;
             }
         });
+
+        // ===== Terminal Easter Egg (triple click/tap on spinner) =====
+        const spinner = document.getElementById("spinner");
+        const terminalOverlay = document.getElementById("terminalOverlay");
+        const terminalBody = document.getElementById("terminalBody");
+
+        let spinnerClickCount = 0;
+        let spinnerClickTimer = null;
+
+        function openTerminal() {
+            if (!terminalOverlay) return;
+            terminalOverlay.style.display = "flex";
+
+            if (terminalBody && !terminalBody.dataset.initialized) {
+                terminalBody.innerHTML = `
+                    <p>asvp@lab:~$ whoami</p>
+                    <p>Jesus — Network & Systems Engineer</p>
+                    <p>asvp@lab:~$ loading portfolio...</p>
+                    <p>asvp@lab:~$ hint: try clicking the "r" in e-Portfolio</p>
+                `;
+                terminalBody.dataset.initialized = "true";
+            }
+        }
+
+        function closeTerminal() {
+            if (!terminalOverlay) return;
+            terminalOverlay.style.display = "none";
+        }
+
+        if (spinner) {
+            spinner.addEventListener("click", () => {
+                spinnerClickCount++;
+
+                if (spinnerClickTimer) clearTimeout(spinnerClickTimer);
+
+                if (spinnerClickCount >= 3) {
+                    spinnerClickCount = 0;
+                    spinnerClickTimer = null;
+                    openTerminal();
+                    return;
+                }
+
+                spinnerClickTimer = setTimeout(() => {
+                    spinnerClickCount = 0;
+                    spinnerClickTimer = null;
+                }, 700); // 700ms window for triple tap
+            });
+        }
+
+        // Click outside terminal window closes it
+        if (terminalOverlay) {
+            terminalOverlay.addEventListener("click", (e) => {
+                if (e.target === terminalOverlay) {
+                    closeTerminal();
+                }
+            });
+        }
     </script>
 </body>
 </html>
