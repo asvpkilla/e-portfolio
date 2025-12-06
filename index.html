@@ -66,16 +66,16 @@
         </div>
     </div>
 
-    <!-- Hidden Rick Roll Player -->
+    <!-- Hidden Rick Roll Player (local MP4) -->
     <div id="rickRollContainer" class="rick-roll-container">
         <!-- Close button (appears after 10s) -->
         <span id="rickCloseBtn" class="rick-close-btn" style="display: none;">✖</span>
-        <iframe id="rickRollFrame"
-            src=""
-            frameborder="0"
-            allow="autoplay; encrypted-media"
-            allowfullscreen>
-        </iframe>
+
+        <video id="rickRollVideo" preload="auto" playsinline>
+            <!-- ✅ UPDATE THIS SRC IF YOUR FILE NAME IS DIFFERENT -->
+            <source src="assets/videos/rickroll.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
 
     <!-- JavaScript -->
@@ -101,53 +101,54 @@
             if (e.target === modal) modal.style.display = "none";
         });
         
-        // Rick Roll Easter Egg (embed first, fallback to YouTube redirect)
+        // Rick Roll Easter Egg (embedded local video w/ delayed close button)
         const rickLetter = document.getElementById("rickTrigger");
         const rickContainer = document.getElementById("rickRollContainer");
-        const rickFrame = document.getElementById("rickRollFrame");
+        const rickVideo = document.getElementById("rickRollVideo");
         const rickCloseBtn = document.getElementById("rickCloseBtn");
-
-        let rickFallbackTimer = null;
 
         if (rickLetter) {
             rickLetter.addEventListener("click", () => {
+                // Reset close button & ensure previous playback is stopped
+                rickCloseBtn.style.display = "none";
+                try {
+                    rickVideo.pause();
+                    rickVideo.currentTime = 40; // jump near "never gonna give you up"
+                } catch (e) {}
 
-            // Reset state
-            rickCloseBtn.style.display = "none";
-            rickContainer.style.display = "block";
+                rickContainer.style.display = "block";
 
-            // Attempt embedded autoplay (muted for max compatibility)
-            rickFrame.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&start=40&mute=1";
+                // Try to play (user click should allow autoplay w/ sound)
+                const playPromise = rickVideo.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                        // If play is blocked, we just leave controls visible
+                        // (you can optionally show a hint here)
+                    });
+                }
 
-            // Fallback: redirect to YouTube if autoplay likely blocked
-            rickFallbackTimer = setTimeout(() => {
-            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=40s&autoplay=1";
-            
-            }, 1500);
+                // Show close button after 10 seconds
+                setTimeout(() => {
+                    rickCloseBtn.style.display = "block";
+                }, 10000);
+            });
+        }
 
-        // Show close button after 10 seconds
-        
-        setTimeout(() => {
-            rickCloseBtn.style.display = "block";
-        }, 10000);
-    });
-}
+        // Close button click
+        rickCloseBtn.addEventListener("click", () => {
+            rickContainer.style.display = "none";
+            rickVideo.pause();
+            rickVideo.currentTime = 0;
+        });
 
-// Close button cancels fallback + stops playback
-rickCloseBtn.addEventListener("click", () => {
-    clearTimeout(rickFallbackTimer);
-    rickContainer.style.display = "none";
-    rickFrame.src = "";
-});
-
-// Clicking background closes AFTER 10s
-window.addEventListener("click", (e) => {
-    if (e.target === rickContainer && rickCloseBtn.style.display === "block") {
-        clearTimeout(rickFallbackTimer);
-        rickContainer.style.display = "none";
-        rickFrame.src = "";
-    }
-});
+        // Clicking background closes AFTER 10 seconds (only when X is visible)
+        window.addEventListener("click", (e) => {
+            if (e.target === rickContainer && rickCloseBtn.style.display === "block") {
+                rickContainer.style.display = "none";
+                rickVideo.pause();
+                rickVideo.currentTime = 0;
+            }
+        });
     </script>
 </body>
 </html>
