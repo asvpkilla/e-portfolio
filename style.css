@@ -237,13 +237,14 @@ body {
 /* Close button window */
 .rick-close-btn {
     position: absolute;
-    top: -30px;
-    right: 5px;
-    font-size: 26px;
+    top: 8px;          /* moved inside container */
+    right: 10px;       /* shifted slightly inward */
+    font-size: 22px;
     color: #ff99ff;
     cursor: pointer;
     text-shadow: 0 0 10px #ff55dd;
     transition: 0.25s ease;
+    z-index: 2;        /* stays above the iframe */
 }
 
 .rick-close-btn:hover {
