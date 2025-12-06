@@ -99,15 +99,28 @@
             if (e.target === modal) modal.style.display = "none";
         });
         
-        // Rick Roll Easter Egg on the "r" in Portfolio
+        // Rick Roll Easter Egg (embedded version)
         const rickLetter = document.getElementById("rickTrigger");
+        const rickContainer = document.getElementById("rickRollContainer");
+        const rickFrame = document.getElementById("rickRollFrame");
 
         if (rickLetter) {
             rickLetter.addEventListener("click", () => {
-                const rickUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&autoplay=1";
-                window.open(rickUrl, "_blank", "noopener");
-            });
-        }
+       
+        // YouTube embed link with autoplay
+        rickFrame.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
+
+        rickContainer.style.display = "block";
+        });
+}
+
+// Click anywhere outside the video closes it
+window.addEventListener("click", (e) => {
+    if (e.target === rickContainer) {
+        rickContainer.style.display = "none";
+        rickFrame.src = ""; // stop playback
+    }
+});
     </script>
 </body>
 </html>
