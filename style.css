@@ -136,6 +136,11 @@ body {
     cursor: pointer;
     border-radius: 6px;
     transition: transform 0.2s;
+
+    /* === Added for readability of black text on badges === */
+    background: rgba(255, 255, 255, 0.18);
+    padding: 10px;
+    backdrop-filter: blur(2px);
 }
 .cert-grid img:hover { transform: scale(1.05); }
 
