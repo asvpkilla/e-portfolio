@@ -42,6 +42,18 @@ body {
 /* Subtext */
 .subtext { font-size: 0.85rem; opacity: 0.8; margin-top: 10px; font-family: 'Press Start 2P', cursive; line-height: 1.25; }
 
+/* EE:RR */
+.rick-letter {
+    cursor: pointer;
+    display: inline-block;
+    transition: transform 0.2s, text-shadow 0.2s;
+}
+
+.rick-letter:hover {
+    transform: scale(1.1) rotate(-3deg);
+    text-shadow: 0 0 8px #ff66cc, 0 0 16px #ff99ff;
+}
+
 /* Spinner */
 .spinner {
     margin: 30px auto;
