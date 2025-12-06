@@ -242,18 +242,35 @@ body {
 /* Close button window */
 .rick-close-btn {
     position: absolute;
-    top: 8px;          /* moved inside container */
-    right: 10px;       /* shifted slightly inward */
-    font-size: 22px;
-    color: #ff99ff;
+    top: 6px;
+    right: 6px;
+
+    font-size: 18px;
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 60, 60, 0.95); /* bright red */
+    color: #ffffff;
+
+    border-radius: 50%;
     cursor: pointer;
-    text-shadow: 0 0 10px #ff55dd;
-    transition: 0.25s ease;
-    z-index: 2;        /* stays above the iframe */
+
+    box-shadow:
+        0 0 8px rgba(255, 80, 80, 0.85),
+        0 0 18px rgba(255, 0, 0, 0.7);
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    z-index: 5;
 }
 
 .rick-close-btn:hover {
-    transform: scale(1.2);
-    color: #ffffff;
+    transform: scale(1.15);
+    box-shadow:
+        0 0 12px rgba(255, 100, 100, 1),
+        0 0 26px rgba(255, 0, 0, 0.9);
 }
 
