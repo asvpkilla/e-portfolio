@@ -233,3 +233,22 @@ body {
     from { opacity: 0; transform: translate(-50%, -48%); }
     to   { opacity: 1; transform: translate(-50%, -50%); }
 }
+
+/* Close button window */
+.rick-close-btn {
+    position: absolute;
+    top: -30px;
+    right: 5px;
+    font-size: 26px;
+    color: #ff99ff;
+    cursor: pointer;
+    text-shadow: 0 0 10px #ff55dd;
+    transition: 0.25s ease;
+}
+
+.rick-close-btn:hover {
+    transform: scale(1.2);
+    color: #ffffff;
+}
+
+
