@@ -101,40 +101,53 @@
             if (e.target === modal) modal.style.display = "none";
         });
         
-        // Rick Roll Easter Egg (embedded version w/ delayed close button)
+        // Rick Roll Easter Egg (embed first, fallback to YouTube redirect)
         const rickLetter = document.getElementById("rickTrigger");
         const rickContainer = document.getElementById("rickRollContainer");
         const rickFrame = document.getElementById("rickRollFrame");
         const rickCloseBtn = document.getElementById("rickCloseBtn");
 
+        let rickFallbackTimer = null;
+
         if (rickLetter) {
             rickLetter.addEventListener("click", () => {
-                // Reset close button + stop previous playback
-                rickCloseBtn.style.display = "none";
-                rickFrame.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&start=40";
 
-                rickContainer.style.display = "block";
+            // Reset state
+            rickCloseBtn.style.display = "none";
+            rickContainer.style.display = "block";
 
-                // Show close button after 10 seconds
-                setTimeout(() => {
-                    rickCloseBtn.style.display = "block";
-                }, 10000);
-            });
-        }
+            // Attempt embedded autoplay (muted for max compatibility)
+            rickFrame.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&start=40&mute=1";
 
-        // Close button click
-        rickCloseBtn.addEventListener("click", () => {
-            rickContainer.style.display = "none";
-            rickFrame.src = ""; 
-        });
+            // Fallback: redirect to YouTube if autoplay likely blocked
+            rickFallbackTimer = setTimeout(() => {
+            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=40s&autoplay=1";
+            
+            }, 1500);
 
-        // Clicking background closes AFTER 10 seconds (only when X is visible)
-        window.addEventListener("click", (e) => {
-            if (e.target === rickContainer && rickCloseBtn.style.display === "block") {
-                rickContainer.style.display = "none";
-                rickFrame.src = "";
-            }
-        });
+        // Show close button after 10 seconds
+        
+        setTimeout(() => {
+            rickCloseBtn.style.display = "block";
+        }, 10000);
+    });
+}
+
+// Close button cancels fallback + stops playback
+rickCloseBtn.addEventListener("click", () => {
+    clearTimeout(rickFallbackTimer);
+    rickContainer.style.display = "none";
+    rickFrame.src = "";
+});
+
+// Clicking background closes AFTER 10s
+window.addEventListener("click", (e) => {
+    if (e.target === rickContainer && rickCloseBtn.style.display === "block") {
+        clearTimeout(rickFallbackTimer);
+        rickContainer.style.display = "none";
+        rickFrame.src = "";
+    }
+});
     </script>
 </body>
 </html>
