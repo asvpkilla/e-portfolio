@@ -88,6 +88,16 @@
         window.addEventListener("click", (e) => {
             if (e.target === modal) modal.style.display = "none";
         });
+        
+        // Rick Roll Easter Egg on the "r" in Portfolio
+        const rickLetter = document.getElementById("rickTrigger");
+
+        if (rickLetter) {
+            rickLetter.addEventListener("click", () => {
+                const rickUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&autoplay=1";
+                window.open(rickUrl, "_blank", "noopener");
+            });
+        }
     </script>
 </body>
 </html>
