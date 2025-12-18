@@ -61,6 +61,7 @@ The site is intentionally lightweight and framework-free to highlight strong **H
 
 ## 🧩 Project Structure
 
+```
 e-portfolio/
 ├── index.html
 ├── about.html
@@ -69,3 +70,4 @@ e-portfolio/
 ├── contact.html
 ├── style.css
 └── assets/
+```
