@@ -7,7 +7,7 @@
 
 **Status:** Active Development 🚧  
 
-This repository contains my personal **interactive e-portfolio**, built as a modern electronic resume and professional showcase using core web technologies.
+This repo contains my personal **interactive e-portfolio**, built as a modern electronic resume and professional showcase using core web technologies. 
 
 ---
 
