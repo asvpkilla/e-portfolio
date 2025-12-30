@@ -20,10 +20,10 @@
         </div>
     </div>
     
-    <!-- Subtle moving scan-line overlay -->
+    <!-- moving backdrop line -->
     <div class="scan-overlay"></div>
 
-    <!-- CRT glitch overlay -->
+    <!-- CRT backdrop  -->
     <div id="crtOverlay" class="crt-overlay"></div>
 
     <div class="container">
@@ -37,16 +37,16 @@
         
         <p class="subtext">Building something clean, personal, and professional.</p>
 
-        <!-- Spinner (EE: Terminal trigger – triple click) -->
+        <!-- it spins, weee lol -->
         <div class="spinner" id="spinner"></div>
 
-        <!-- Buttons -->
+        <!-- buttons -->
         <div class="buttons-container">
             <a class="resume-btn" href="Jesus_Santiago_Resume_Optimized.pdf" download>Download Resume</a>
             <button class="cert-btn" id="certBtn">View Certifications</button>
         </div>
 
-        <!-- Social links -->
+        <!-- socials -->
         <div class="social-links">
             <a href="https://github.com/asvpkilla" target="_blank">GitHub</a>
             <a href="https://www.linkedin.com/in/jmsantiago95" target="_blank">LinkedIn</a>
@@ -54,11 +54,13 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- certs button/modal -->
     <div id="certModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <h2>My Certifications</h2>
+            
+            <!-- cert assests -->
             <div class="cert-grid">
                 <a href="https://www.credly.com/badges/8a3b3f8e-cda9-4d99-b780-2a13f23afb5a" target="_blank">
                     <img src="assets/certifications/ccna/ccna_600.png" alt="CCNA Badge">
@@ -70,19 +72,19 @@
         </div>
     </div>
 
-    <!-- Hidden Rick Roll Player (local MP4) -->
+    <!-- RREE -->
     <div id="rickRollContainer" class="rick-roll-container">
         
-        <!-- Close button (appears after 10s) -->
+        <!-- close button opens after 10s -->
         <span id="rickCloseBtn" class="rick-close-btn" style="display: none;">✖</span>
 
-        <!-- Rick Roll video info -->
+        <!-- RREE video info -->
         <video id="rickRollVideo" preload="auto" playsinline>
             <source src="assets/videos/rickroll.mp4" type="video/mp4">
         </video>
     </div>
 
-    <!-- Hidden Terminal EE -->
+    <!-- terminal EE -->
     <div id="terminalOverlay" class="terminal-overlay">
         <div class="terminal-window">
             <div class="terminal-header">
@@ -105,7 +107,7 @@
         </div>
     </div>
 
-    <!-- JavaScript -->
+    <!-- JS code, this is the fun part lol  -->
     <script>
         const modal = document.getElementById("certModal");
         const btn = document.getElementById("certBtn");
@@ -128,7 +130,7 @@
             if (e.target === modal) modal.style.display = "none";
         });
         
-        // Rick Roll Easter Egg (local video w/ delayed close button)
+        // ===== RREE ===== 
         const rickLetter = document.getElementById("rickTrigger");
         const rickContainer = document.getElementById("rickRollContainer");
         const rickVideo = document.getElementById("rickRollVideo");
@@ -137,38 +139,36 @@
         if (rickLetter) {
             rickLetter.addEventListener("click", () => {
                 
-                // Reset close button & ensure previous playback is stopped
+                // resets the playback then starts at specific timestamp
                 rickCloseBtn.style.display = "none";
                 try {
                     rickVideo.pause();
-                    rickVideo.currentTime = 40; // jump near "never gonna give you up"
+                    rickVideo.currentTime = 40;
                 } catch (e) {}
 
                 rickContainer.style.display = "block";
 
-                // Try to play (user click should allow autoplay w/ sound)
+                // autoplay feature (WIP - works on mobile NOT desktop)
                 const playPromise = rickVideo.play();
                 if (playPromise !== undefined) {
-                    playPromise.catch(() => {
-                        // If play is blocked, user can manually press play
-                    });
+                    playPromise.catch(() => {});
                 }
 
-                // Show close button after 10 seconds
+                // after 10s, close button appears
                 setTimeout(() => {
                     rickCloseBtn.style.display = "block";
                 }, 10000);
             });
         }
 
-        // Close button click (Rick Roll)
+        // waiting for the close click
         rickCloseBtn.addEventListener("click", () => {
             rickContainer.style.display = "none";
             rickVideo.pause();
             rickVideo.currentTime = 0;
         });
 
-        // Clicking background closes Rick Roll after 10 seconds (only when X is visible)
+        // after 10s, user is able to click the background to close
         window.addEventListener("click", (e) => {
             if (e.target === rickContainer && rickCloseBtn.style.display === "block") {
                 rickContainer.style.display = "none";
@@ -177,7 +177,7 @@
             }
         });
 
-        // ===== Terminal Easter Egg via Spinner Triple Click =====
+        // ===== terminal EE =====
         const spinner = document.getElementById("spinner");
         const crtOverlay = document.getElementById("crtOverlay");
         const terminalOverlay = document.getElementById("terminalOverlay");
@@ -197,32 +197,33 @@
         }
 
         function openTerminalWithGlitch() {
-            // Show CRT glitch
+            // CRT glitch when EE is found
             crtOverlay.classList.add("crt-active");
             crtOverlay.style.display = "block";
 
+            // stops the CRT flash after 350ms
             setTimeout(() => {
-                // Hide glitch and show terminal
                 crtOverlay.classList.remove("crt-active");
                 crtOverlay.style.display = "none";
-
                 terminalOverlay.style.display = "flex";
                 terminalInput.value = "";
                 terminalOutput.innerHTML = "";
                 terminalInput.focus();
-            }, 350); // glitch duration
+            }, 350);
         }
 
         if (spinner) {
             spinner.addEventListener("click", () => {
                 spinnerClickCount++;
 
+                // time inbetween each click (600ms)
                 if (!spinnerClickTimer) {
                     spinnerClickTimer = setTimeout(() => {
                         resetSpinnerClickCount();
-                    }, 600); // 600ms window for triple-click
+                    }, 600);
                 }
 
+                // number of clicks to active
                 if (spinnerClickCount === 3) {
                     resetSpinnerClickCount();
                     openTerminalWithGlitch();
@@ -234,29 +235,29 @@
             terminalOverlay.style.display = "none";
         }
 
-        // Close terminal: X button
+        // close terminal with button
         terminalCloseBtn.addEventListener("click", () => {
             closeTerminal();
         });
 
-        // Close terminal: click background
+        // close terminal with background click
         window.addEventListener("click", (e) => {
             if (e.target === terminalOverlay) {
                 closeTerminal();
             }
         });
 
-        // Terminal input logic (Enter key)
+        // terminal logic
         terminalInput.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
                 const value = terminalInput.value.trim();
                 if (!value) return;
 
-                // Echo input
+                // opening info
                 const safeValue = value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
                 terminalOutput.innerHTML += `<div class="terminal-line">> ${safeValue}</div>`;
 
-                // Secret phrase
+                // 🙊
                 if (value.toLowerCase() === "master keeper") {
                     terminalOutput.innerHTML += `
                         <div class="terminal-line">access granted: master routes unlocked</div>
@@ -266,17 +267,17 @@
                         <div class="terminal-line">- email: <a href="mailto:jesus@asvp.info">jesus@asvp.info</a></div>
                     `;
                 } else {
-                    // Generic response
+                    // terminal reply
                     terminalOutput.innerHTML += `<div class="terminal-line">acknowledged: "${safeValue}" — command pending implementation</div>`;
                 }
 
-                // Scroll to bottom of terminal output
+                // scrollbar
                 terminalOutput.scrollTop = terminalOutput.scrollHeight;
                 terminalInput.value = "";
             }
         });
 
-        // Optional: ESC key closes terminal
+        // close terminal using ESC
         window.addEventListener("keydown", (e) => {
             if (e.key === "Escape" && terminalOverlay.style.display === "flex") {
                 closeTerminal();
