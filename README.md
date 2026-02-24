@@ -40,12 +40,12 @@ The site is intentionally lightweight and framework-free to highlight strong **H
 
 | Page | Description |
 |------|------------|
-| `index.html` | Splash / home |
-| `about.html` | Professional summary |
-| `projects.html` | Project showcase |
-| `resume.html` | HTML resume |
-| `contact.html` | Contact details |
-| `style.css` | Global styling |
+| `index.html` | Home |
+| `about.html` | Professional Knowledge |
+| `projects.html` | Project Discovery |
+| `resume.html` | ePortfolio |
+| `contact.html` | Contact Info |
+| `style.css` | Creative Design |
 
 ---
 
