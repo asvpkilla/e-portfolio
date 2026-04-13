@@ -5,30 +5,22 @@
     box-sizing: border-box;
 }
 
+html,
 body {
     margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
     padding: 55px 20px 40px;
     min-height: 100vh;
     background: radial-gradient(circle at top, #1a1035, #090a12 65%, #060608);
     color: #e8d9ff;
     font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
     line-height: 1.6;
     position: relative;
-}
-
-/* ===== Scanline overlay ===== */
-.scan-overlay {
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.02),
-        rgba(255,255,255,0.02) 1px,
-        transparent 2px
-    );
-    pointer-events: none;
-    z-index: 0;
 }
 
 /* ===== Layout ===== */
@@ -52,6 +44,7 @@ header {
 
 /* ===== Terminal Name Typing ===== */
 .terminal-name {
+    position: relative;
     display: inline-block;
     margin: 0;
     padding: 0;
@@ -61,12 +54,23 @@ header {
     color: #f3e8ff;
     text-shadow: 0 0 10px rgba(168, 85, 247, 0.35);
     white-space: nowrap;
-    overflow: visible;
+    overflow: hidden;
     clip-path: inset(0 100% 0 0);
-    animation: typingReveal 4.5s steps(60, end) forwards;
+    animation: typingReveal 4.8s steps(70, end) forwards;
 }
 
-/* ===== Typing Animation ===== */
+/* Cursor */
+.terminal-name::after {
+    content: "";
+    position: absolute;
+    top: 0.1em;
+    right: 0;
+    width: 2px;
+    height: 0.9em;
+    background: rgba(214, 184, 255, 0.9);
+    animation: cursorHide 4.8s linear forwards;
+}
+
 @keyframes typingReveal {
     from {
         clip-path: inset(0 100% 0 0);
@@ -76,6 +80,11 @@ header {
     }
 }
 
+@keyframes cursorHide {
+    0%, 99% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
 .subtitle {
     margin: 12px 0 20px;
     font-size: 1rem;
@@ -83,42 +92,29 @@ header {
     max-width: 700px;
 }
 
-/* ===== Profile Image Container ===== */
+/* ===== Profile Image ===== */
 .pfp-container {
     width: 200px;
+    max-width: 100%;
     border-radius: 12px;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.03);
     padding: 6px;
-    transition: box-shadow 0.3s ease;
 }
 
-/* ===== Profile Image ===== */
 .profile-pic {
     width: 100%;
-    height: auto;
     display: block;
     border-radius: 8px;
-    transition: transform 0.3s ease;
-}
-
-/* ===== Hover Glow ===== */
-.pfp-container:hover .profile-pic {
-    transform: scale(1.03);
-}
-
-.pfp-container:hover {
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.5),
-                0 0 40px rgba(168, 85, 247, 0.25);
 }
 
 /* ===== Navigation ===== */
 nav {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     gap: 12px;
     margin-top: 15px;
+    width: 100%;
 }
 
 nav a {
@@ -128,81 +124,11 @@ nav a {
     border: 1px solid rgba(168, 85, 247, 0.25);
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.03);
-    font-size: 0.9rem;
-    transition: all 0.2s ease;
 }
 
-nav a:hover {
-    color: #ffffff;
-    border-color: rgba(200, 150, 255, 0.6);
-    box-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
-    text-shadow: 0 0 6px rgba(168, 85, 247, 0.5);
-}
-
-/* ===== Main Content ===== */
-main {
-    display: flex;
-    justify-content: center;
-}
-
-.about-me {
-    width: 100%;
-    max-width: 850px;
-    padding: 28px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(168, 85, 247, 0.15);
-    border-radius: 18px;
-    box-shadow: 0 0 24px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(6px);
-}
-
-.about-me h2,
-.about-me h3 {
-    color: #f3e8ff;
-}
-
-.about-me h2 {
-    margin-bottom: 16px;
-}
-
-.about-me h3 {
-    margin-top: 28px;
-    margin-bottom: 10px;
-}
-
-.about-me p {
-    margin-bottom: 16px;
-    color: #ddd6f3;
-}
-
-.about-me ul {
-    padding-left: 20px;
-}
-
-.about-me li {
-    margin-bottom: 10px;
-}
-
-/* ===== Footer ===== */
-footer {
-    text-align: center;
-    margin-top: 30px;
-    color: #cbb9e8;
-    font-size: 0.95rem;
-}
-
-footer a {
-    color: #d6b8ff;
-    text-decoration: none;
-}
-
-footer a:hover {
-    color: #ffffff;
-    text-shadow: 0 0 6px rgba(168, 85, 247, 0.5);
-}
-
-/* ===== Responsive ===== */
+/* ===== MOBILE ===== */
 @media (max-width: 768px) {
+
     body {
         padding: 40px 16px 30px;
     }
@@ -211,43 +137,45 @@ footer a:hover {
         margin-bottom: 30px;
     }
 
+    /* 🔥 KEEP typing, but allow wrapping */
     .terminal-name {
-        font-size: clamp(1.9rem, 9vw, 3rem);
+        font-size: clamp(1.8rem, 8vw, 2.6rem);
         white-space: normal;
-        word-break: normal;
         overflow-wrap: break-word;
-        clip-path: none;
-        animation: none;
-        max-width: 100%;
     }
 
     .subtitle {
         font-size: 0.95rem;
         max-width: 100%;
-        padding: 0 4px;
     }
 
     .pfp-container {
         width: 160px;
     }
 
+    /* 🔥 Horizontal scroll nav */
     nav {
-        width: 100%;
-        max-width: 320px;
-        flex-direction: column;
-        align-items: center;
-        gap: 14px;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 5px;
     }
 
     nav a {
-        display: block;
-        width: 100%;
-        text-align: center;
-        padding: 14px 18px;
-        font-size: 0.95rem;
+        flex: 0 0 auto;
+        white-space: nowrap;
+        padding: 10px 14px;
+        font-size: 0.85rem;
     }
 
-    .about-me {
-        padding: 22px;
+    nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    nav {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
 }
