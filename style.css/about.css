@@ -31,7 +31,7 @@ body {
     z-index: 0;
 }
 
-/* ===== Main layout ===== */
+/* ===== Layout ===== */
 header,
 main,
 footer {
@@ -50,6 +50,7 @@ header {
     margin-bottom: 40px;
 }
 
+/* 🔥 Fix spacing issue */
 header h1 {
     margin: 0;
     padding: 0;
@@ -66,20 +67,33 @@ header h1 {
     max-width: 700px;
 }
 
-.profile-pic {
-    width: 180px;
-    max-width: 100%;
-    height: auto;
-    margin: 0 0 20px;
-    border-radius: 50%;
-    border: 2px solid rgba(200, 150, 255, 0.35);
-    box-shadow: 0 0 18px rgba(168, 85, 247, 0.18);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+/* ===== Profile Image Container ===== */
+.pfp-container {
+    width: 200px;
+    border-radius: 12px; /* clean rounded look */
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03); /* subtle frame */
+    padding: 6px;
+    transition: box-shadow 0.3s ease;
 }
 
-.profile-pic:hover {
+/* ===== Profile Image ===== */
+.profile-pic {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+/* 🔥 Hover Effects */
+.pfp-container:hover .profile-pic {
     transform: scale(1.03);
-    box-shadow: 0 0 22px rgba(168, 85, 247, 0.3);
+}
+
+.pfp-container:hover {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.5),
+                0 0 40px rgba(168, 85, 247, 0.25);
 }
 
 /* ===== Navigation ===== */
@@ -88,7 +102,7 @@ nav {
     flex-wrap: wrap;
     justify-content: center;
     gap: 12px;
-    margin-top: 5px;
+    margin-top: 15px;
 }
 
 nav a {
@@ -98,6 +112,7 @@ nav a {
     border: 1px solid rgba(168, 85, 247, 0.25);
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.03);
+    font-size: 0.9rem;
     transition: all 0.2s ease;
 }
 
@@ -108,7 +123,7 @@ nav a:hover {
     text-shadow: 0 0 6px rgba(168, 85, 247, 0.5);
 }
 
-/* ===== Main content ===== */
+/* ===== Main Content ===== */
 main {
     display: flex;
     justify-content: center;
@@ -128,33 +143,28 @@ main {
 .about-me h2,
 .about-me h3 {
     color: #f3e8ff;
-    margin-top: 0;
 }
 
 .about-me h2 {
-    font-size: 1.8rem;
     margin-bottom: 16px;
 }
 
 .about-me h3 {
     margin-top: 28px;
     margin-bottom: 10px;
-    font-size: 1.2rem;
 }
 
 .about-me p {
-    margin: 0 0 16px;
+    margin-bottom: 16px;
     color: #ddd6f3;
 }
 
 .about-me ul {
-    margin: 0;
     padding-left: 20px;
 }
 
 .about-me li {
     margin-bottom: 10px;
-    color: #ddd6f3;
 }
 
 /* ===== Footer ===== */
@@ -181,16 +191,8 @@ footer a:hover {
         padding: 40px 16px 30px;
     }
 
-    header {
-        margin-bottom: 30px;
-    }
-
-    .subtitle {
-        font-size: 0.95rem;
-    }
-
-    .profile-pic {
-        width: 150px;
+    .pfp-container {
+        width: 160px;
     }
 
     .about-me {
