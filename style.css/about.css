@@ -63,8 +63,8 @@ header {
     color: #f3e8ff;
     text-shadow: 0 0 10px rgba(168, 85, 247, 0.35);
     border-right: 2px solid rgba(214, 184, 255, 0.9);
-    animation: typingName 4s steps(60, end) forwards,
-               hideCursor 0.01s linear 4s forwards;    
+    animation: typingName 4.5s steps(60, end) forwards,
+               hideCursor 0.01s linear 1s forwards;    
 }
 
 /* ===== Typing Animations ===== */
