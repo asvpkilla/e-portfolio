@@ -53,32 +53,34 @@ header {
 /* ===== Terminal Name Typing ===== */
 .terminal-name {
     display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;    
-    width: 0;
     margin: 0;
     padding: 0;
+    max-width: 100%;
     font-size: clamp(2rem, 4vw, 3rem);
     line-height: 1.1;
     color: #f3e8ff;
     text-shadow: 0 0 10px rgba(168, 85, 247, 0.35);
-    border-right: 2px solid rgba(214, 184, 255, 0.9);
-    animation: typingName 4.5s steps(60, end) forwards;  
+    white-space: nowrap;
+    overflow: visible;
+    clip-path: inset(0 100% 0 0);
+    animation: typingReveal 4.5s steps(60, end) forwards;
 }
 
-/* ===== Typing Animations ===== */
-@keyframes typingName {
-    0% { 
-        width: 0;
-        border-right-color: rgba(214, 184, 255, 0.9);
+/* ===== Typing Animation ===== */
+@keyframes typingReveal {
+    from {
+        clip-path: inset(0 100% 0 0);
     }
-    99% {
-        border-right-color: rgba(214, 184, 255, 0.9);
+    to {
+        clip-path: inset(0 0 0 0);
     }
-    100% { 
-        width: 100%;
-        border-right-color: transparent;
-    }
+}
+
+.subtitle {
+    margin: 12px 0 20px;
+    font-size: 1rem;
+    color: #d8c8f3;
+    max-width: 700px;
 }
 
 /* ===== Profile Image Container ===== */
@@ -205,25 +207,47 @@ footer a:hover {
         padding: 40px 16px 30px;
     }
 
+    header {
+        margin-bottom: 30px;
+    }
+
+    .terminal-name {
+        font-size: clamp(1.9rem, 9vw, 3rem);
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: break-word;
+        clip-path: none;
+        animation: none;
+        max-width: 100%;
+    }
+
+    .subtitle {
+        font-size: 0.95rem;
+        max-width: 100%;
+        padding: 0 4px;
+    }
+
     .pfp-container {
         width: 160px;
     }
 
-    .about-me {
-        padding: 22px;
+    nav {
+        width: 100%;
+        max-width: 320px;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
     }
 
     nav a {
+        display: block;
         width: 100%;
-        max-width: 220px;
         text-align: center;
+        padding: 14px 18px;
+        font-size: 0.95rem;
     }
 
-    /* disable typing effect on small screens (prevents layout issues) */
-    .terminal-name {
-        width: auto;
-        white-space: normal;
-        border-right: none;
-        animation: none;
+    .about-me {
+        padding: 22px;
     }
 }
