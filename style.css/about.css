@@ -100,7 +100,7 @@ header {
         width: 0;
     }
     to {
-        width: 100%;
+        width: 115%;
     }
 }
 
@@ -108,7 +108,7 @@ header {
     0%, 99% {
         opacity: 1;
     }
-    100% {
+    115% {
         opacity: 0;
     }
 }
