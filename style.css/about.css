@@ -63,7 +63,7 @@ header {
     color: #f3e8ff;
     text-shadow: 0 0 10px rgba(168, 85, 247, 0.35);
     border-right: 2px solid rgba(214, 184, 255, 0.9);
-    animation: typingName 3s steps(60, end) forwards;  
+    animation: typingName 4.5s steps(60, end) forwards;  
 }
 
 /* ===== Typing Animations ===== */
@@ -76,7 +76,7 @@ header {
         border-right-color: rgba(214, 184, 255, 0.9);
     }
     100% { 
-        width: 60ch;
+        width: 100%;
         border-right-color: transparent;
     }
 }
