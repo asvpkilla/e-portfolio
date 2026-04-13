@@ -50,8 +50,16 @@ header {
     margin-bottom: 40px;
 }
 
-/* 🔥 Fix spacing issue */
-header h1 {
+/* ===== Terminal Name Typing ===== */
+.terminal-name {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid rgba(214, 184, 255, 0.9);
+    width: 0;
+    animation: typingName 2.2s steps(16, end) forwards,
+               blinkCursor 0.75s step-end infinite;
+
     margin: 0;
     padding: 0;
     font-size: clamp(2rem, 4vw, 3rem);
@@ -60,19 +68,53 @@ header h1 {
     text-shadow: 0 0 10px rgba(168, 85, 247, 0.35);
 }
 
-.subtitle {
-    margin: 12px 0 20px;
+/* Role under name */
+.role {
+    margin: 8px 0 20px;
     font-size: 1rem;
     color: #d8c8f3;
-    max-width: 700px;
+
+    opacity: 0;
+    animation: fadeInRole 0.6s ease forwards;
+    animation-delay: 2.2s;
+}
+
+/* ===== Typing Animations ===== */
+@keyframes typingName {
+    from {
+        width: 0;
+    }
+    to {
+        width: 16ch;
+    }
+}
+
+@keyframes blinkCursor {
+    0%, 50% {
+        border-color: rgba(214, 184, 255, 0.9);
+    }
+    51%, 100% {
+        border-color: transparent;
+    }
+}
+
+@keyframes fadeInRole {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ===== Profile Image Container ===== */
 .pfp-container {
     width: 200px;
-    border-radius: 12px; /* clean rounded look */
+    border-radius: 12px;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.03); /* subtle frame */
+    background: rgba(255, 255, 255, 0.03);
     padding: 6px;
     transition: box-shadow 0.3s ease;
 }
@@ -86,7 +128,7 @@ header h1 {
     transition: transform 0.3s ease;
 }
 
-/* 🔥 Hover Effects */
+/* ===== Hover Glow ===== */
 .pfp-container:hover .profile-pic {
     transform: scale(1.03);
 }
@@ -203,5 +245,18 @@ footer a:hover {
         width: 100%;
         max-width: 220px;
         text-align: center;
+    }
+
+    /* disable typing effect on small screens (prevents layout issues) */
+    .terminal-name {
+        width: auto;
+        white-space: normal;
+        border-right: none;
+        animation: none;
+    }
+
+    .role {
+        opacity: 1;
+        animation: none;
     }
 }
