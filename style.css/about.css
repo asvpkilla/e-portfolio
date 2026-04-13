@@ -68,17 +68,6 @@ header {
     text-shadow: 0 0 10px rgba(168, 85, 247, 0.35);
 }
 
-/* Role under name */
-.role {
-    margin: 8px 0 20px;
-    font-size: 1rem;
-    color: #d8c8f3;
-
-    opacity: 0;
-    animation: fadeInRole 0.6s ease forwards;
-    animation-delay: 2.2s;
-}
-
 /* ===== Typing Animations ===== */
 @keyframes typingName {
     from {
@@ -95,17 +84,6 @@ header {
     }
     51%, 100% {
         border-color: transparent;
-    }
-}
-
-@keyframes fadeInRole {
-    from {
-        opacity: 0;
-        transform: translateY(5px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
     }
 }
 
@@ -252,11 +230,6 @@ footer a:hover {
         width: auto;
         white-space: normal;
         border-right: none;
-        animation: none;
-    }
-
-    .role {
-        opacity: 1;
         animation: none;
     }
 }
