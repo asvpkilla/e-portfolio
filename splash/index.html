@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jesus Santiago — e-Portfolio Coming Soon">
+    <title>Jesus’ e-Portfolio — Coming Soon</title>
+
+    <!-- "press start" font API call -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <!-- this make things look fancy -->     
+    <link rel="stylesheet" href="style.css/index.css">
+</head>
+
+<body>
+    <div class="top-banner">
+        <div class="banner-text">
+            🚧 Currently the full site is under construction — this is just a splash page. Please explore! Might find something special 😊
+        </div>
+    </div>
+    
+    <!-- moving backdrop line -->
+    <div class="scan-overlay"></div>
+
+    <!-- CRT backdrop  -->
+    <div id="crtOverlay" class="crt-overlay"></div>
+
+    <div class="container">
+        
+        <!-- center text including RREE while using neon glow -->
+        <h1 class="glow-text">
+            <span class="line1">Jesus’</span>
+            <span class="line2">e-Po<span id="rickTrigger" class="rick-letter">r</span>tfolio
+            </span>
+        </h1>
+        
+        <p class="subtext">Building something clean, personal, and professional.</p>
+
+        <!-- it spins, weee lol -->
+        <div class="spinner" id="spinner"></div>
+
+        <!-- buttons -->
+        <div class="buttons-container">
+            <a class="resume-btn" href="Jesus_Santiago_Resume_Optimized.pdf" download>Download Resume</a>
+            <button class="cert-btn" id="certBtn">View Certifications</button>
+        </div>
+
+        <!-- socials -->
+        <div class="social-links">
+            <a href="https://github.com/asvpkilla" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/jmsantiago95" target="_blank">LinkedIn</a>
+            <a href="mailto:jesus@asvp.info">Email</a>
+        </div>
+    </div>
+
+    <!-- certs button/modal -->
+    <div id="certModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>My Certifications</h2>
+            
+            <!-- cert assests -->
+            <div class="cert-grid">
+                <a href="https://www.credly.com/badges/8a3b3f8e-cda9-4d99-b780-2a13f23afb5a" target="_blank">
+                    <img src="assets/certifications/ccna/ccna_600.png" alt="CCNA Badge">
+                </a>
+                <a href="https://www.credly.com/badges/8a813caf-6e2e-465e-9572-5dd0469c7a1e" target="_blank">
+                    <img src="assets/certifications/sec/sec+.png" alt="Security+ Badge">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- RREE -->
+    <div id="rickRollContainer" class="rick-roll-container">
+        
+        <!-- close button opens after 10s -->
+        <span id="rickCloseBtn" class="rick-close-btn" style="display: none;">✖</span>
+
+        <!-- RREE video info -->
+        <video id="rickRollVideo" preload="auto" playsinline>
+            <source src="assets/videos/rickroll.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- terminal EE -->
+    <div id="terminalOverlay" class="terminal-overlay">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                Super Secret Secure C-Shell
+            </div>
+            <div class="terminal-body">
+                <pre class="terminal-line">> you found it, you really found my terminial, nice work! 😊</pre>
+                <pre class="terminal-line">> establishing and initializing secure session...</pre>
+                <pre class="terminal-line">> please select a number from the prompts below...</pre>
+                <pre class="terminal-line">1. pending</pre>
+
+                <div class="terminal-input-line">
+                    <span>&gt;</span>
+                    <input id="terminalInput" type="text" autocomplete="off" />
+                </div>
+
+                <div id="terminalOutput" class="terminal-output"></div>
+            </div>
+            <span id="terminalCloseBtn" class="terminal-close-btn">✖</span>
+        </div>
+    </div>
+
+    <!-- JS code, this is the fun part lol  -->
+    <script>
+        const modal = document.getElementById("certModal");
+        const btn = document.getElementById("certBtn");
+        const closeBtn = document.querySelector(".close-btn");
+
+        window.addEventListener("DOMContentLoaded", () => {
+            modal.style.display = "none";
+        });
+
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            modal.style.display = "flex";
+        });
+
+        closeBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener("click", (e) => {
+            if (e.target === modal) modal.style.display = "none";
+        });
+        
+        // ===== RREE ===== 
+        const rickLetter = document.getElementById("rickTrigger");
+        const rickContainer = document.getElementById("rickRollContainer");
+        const rickVideo = document.getElementById("rickRollVideo");
+        const rickCloseBtn = document.getElementById("rickCloseBtn");
+
+        if (rickLetter) {
+            rickLetter.addEventListener("click", () => {
+                
+                // resets the playback then starts at specific timestamp
+                rickCloseBtn.style.display = "none";
+                try {
+                    rickVideo.pause();
+                    rickVideo.currentTime = 40;
+                } catch (e) {}
+
+                rickContainer.style.display = "block";
+
+                // autoplay feature (WIP - works on mobile NOT desktop)
+                const playPromise = rickVideo.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {});
+                }
+
+                // after 10s, close button appears
+                setTimeout(() => {
+                    rickCloseBtn.style.display = "block";
+                }, 10000);
+            });
+        }
+
+        // waiting for the close click
+        rickCloseBtn.addEventListener("click", () => {
+            rickContainer.style.display = "none";
+            rickVideo.pause();
+            rickVideo.currentTime = 0;
+        });
+
+        // after 10s, user is able to click the background to close
+        window.addEventListener("click", (e) => {
+            if (e.target === rickContainer && rickCloseBtn.style.display === "block") {
+                rickContainer.style.display = "none";
+                rickVideo.pause();
+                rickVideo.currentTime = 0;
+            }
+        });
+
+        // ===== terminal EE =====
+        const spinner = document.getElementById("spinner");
+        const crtOverlay = document.getElementById("crtOverlay");
+        const terminalOverlay = document.getElementById("terminalOverlay");
+        const terminalInput = document.getElementById("terminalInput");
+        const terminalOutput = document.getElementById("terminalOutput");
+        const terminalCloseBtn = document.getElementById("terminalCloseBtn");
+
+        let spinnerClickCount = 0;
+        let spinnerClickTimer = null;
+
+        function resetSpinnerClickCount() {
+            spinnerClickCount = 0;
+            if (spinnerClickTimer) {
+                clearTimeout(spinnerClickTimer);
+                spinnerClickTimer = null;
+            }
+        }
+
+        function openTerminalWithGlitch() {
+            // CRT glitch when EE is found
+            crtOverlay.classList.add("crt-active");
+            crtOverlay.style.display = "block";
+
+            // stops the CRT flash after 350ms
+            setTimeout(() => {
+                crtOverlay.classList.remove("crt-active");
+                crtOverlay.style.display = "none";
+                terminalOverlay.style.display = "flex";
+                terminalInput.value = "";
+                terminalOutput.innerHTML = "";
+                terminalInput.focus();
+            }, 350);
+        }
+
+        if (spinner) {
+            spinner.addEventListener("click", () => {
+                spinnerClickCount++;
+
+                // time inbetween each click (600ms)
+                if (!spinnerClickTimer) {
+                    spinnerClickTimer = setTimeout(() => {
+                        resetSpinnerClickCount();
+                    }, 600);
+                }
+
+                // number of clicks to active
+                if (spinnerClickCount === 3) {
+                    resetSpinnerClickCount();
+                    openTerminalWithGlitch();
+                }
+            });
+        }
+
+        function closeTerminal() {
+            terminalOverlay.style.display = "none";
+        }
+
+        // close terminal with button
+        terminalCloseBtn.addEventListener("click", () => {
+            closeTerminal();
+        });
+
+        // close terminal with background click
+        window.addEventListener("click", (e) => {
+            if (e.target === terminalOverlay) {
+                closeTerminal();
+            }
+        });
+
+        // terminal logic
+        terminalInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                const value = terminalInput.value.trim();
+                if (!value) return;
+
+                // opening info
+                const safeValue = value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                terminalOutput.innerHTML += `<div class="terminal-line">> ${safeValue}</div>`;
+
+                // 🙊
+                if (value.toLowerCase() === "master keeper") {
+                    terminalOutput.innerHTML += `
+                        <div class="terminal-line">access granted: master routes unlocked</div>
+                        <div class="terminal-line">-<a href="https://about.asvp.info" target="_blank">learn more about me ¯\\_(ツ)_/¯</a></div>
+                    `;
+                } else {
+                    // terminal reply
+                    terminalOutput.innerHTML += `<div class="terminal-line">acknowledged: "${safeValue}" — command pending implementation</div>`;
+                }
+
+                // scrollbar
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+                terminalInput.value = "";
+            }
+        });
+
+        // close terminal using ESC
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && terminalOverlay.style.display === "flex") {
+                closeTerminal();
+            }
+        });
+    </script>
+</body>
+</html>
